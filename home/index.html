@@ -1,1 +1,267 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta property="og:title" content="budgetz free movies"> <meta property="og:description" content="Watch free movies with no fucking ads" /> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width,initial-scale=1" /> <title>Budgetz Movies</title> <style> * { box-sizing: border-box; } body { margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #0d0d0d; color: #f0f0f0; line-height: 1.6; } header { text-align: center; padding: 2rem 1rem; background: linear-gradient(to right, #111, #1a1a1a); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); border-bottom: 1px solid #222; } header h1 { color: gold; font-size: 3rem; display: inline; } header h2 { color: cyan; font-size: 2rem; margin-top: 0.3rem; } /* Zoekbalk */ .search-bar { text-align: center; padding: 1rem; } #search { padding: 0.7rem; width: 80%; max-width: 400px; font-size: 1rem; border-radius: 10px; border: none; background-color: #222; color: white; box-shadow: 0 0 10px #007bff44; transition: 0.3s; } #search:focus { outline: none; box-shadow: 0 0 15px #00ffff88; } /* Filmlijst */ .movie-buttons { text-align: center; padding: 1rem; display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; } .movie-button { background: linear-gradient(145deg, #007bff, #0051aa); color: white; border: none; padding: 1rem 1.5rem; font-size: 1rem; cursor: pointer; border-radius: 12px; transition: background 0.3s, transform 0.2s; min-width: 180px; } .movie-button:hover { background: linear-gradient(145deg, #00bfff, #007bff); transform: scale(1.05); } /* Video container */ .video-container { display: none; margin: 30px auto; padding: 20px; background-color: #1a1a1a; border-radius: 16px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.1); max-width: 900px; text-align: center; animation: fadeIn 0.5s ease-in-out; } .video-title { font-size: 1.8rem; margin-bottom: 20px; color: #00ffff; } video { width: 100%; max-width: 800px; height: auto; border-radius: 12px; box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); } /* Loader */ .loader { display: none; font-size: 2rem; text-align: center; padding: 2rem; color: #00ffff; } /* Animatie fade in */ @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } } /* Mobielvriendelijk */ @media (max-width: 600px) { header h1 { font-size: 2.5rem; } header h2 { font-size: 1.5rem; } .movie-button { width: 100%; font-size: 1rem; } } </style> </head> <body> <header> <h1>budgetz<h1> <h2>movies</h2> </header> <div class="video-container" id="videoContainer"> <h2 class="video-title" id="videoTitle">Select a movie</h2> <video id="videoPlayer" controls> <source id="videoSource" type="video/mp4"> Your browser does not support the video tag. </video> </div> <div class="loader" id="loader">Loading...</div> <div class="search-bar"> <input type="text" id="search" placeholder="Search movies..." oninput="filterMovies()"> </div> <div class="movie-buttons" id="movieButtons"> <button class="movie-button" onclick="loadVideo('balerina 2025', 'https://abra--2531e06c.api.cosmic-crab.buzz/18ab2385f515456e08380033b4dcfb5258358c33/Ballerina%20%282025%29%20%5B2160p%5D%20%5BHDR%5D%20%28WEB-DL%29%20%5BWMAN-LorD%5D/Ballerina.2025.2160p.WEB-DL.HDR.x265.10bit.ATMOS.DD5.1.%5BWMAN-LorD%5D.mkv?api-key=8acbcf1e-732c-4574-a3bf-27e6a85b86f1&download=true&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTE4MjI5MzAsInJhdGUiOiI1TSIsInJvbGUiOiJmcmVlIiwic2Vzc2lvbklEIjoiTVRjMU1UY3pOak0yTjN4T2QzZEJUa1ZuTVZaVVVsUlVNSEJXVld0V1EwNVZSVEJVUlRGQ1ZsUk5NVkV4YUVKUmEwNUxVa1pGTTA1cmRGZFJNR2hYVkZWM01WTkdUbUZWVlRWSlZFVm9TRTE2VGtWU1ZVVTlmRFBwa01EenNSZEVWWkVxWEs1TjlpV0Voa19zY2dpb2F5NncyTXNPeDY5aSIsImRvbWFpbiI6IndlYnRvci5pbyIsImFnZW50IjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6MTQwLjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvMTQwLjAiLCJyZW1vdGVBZGRyZXNzIjoiMTcyLjY4LjIzNC4xODcifQ.L6cFgPZ8zlsgBUTC0d8UVZn6I4ZHwmYDsCJw0BYwI9s')">Ballerina (2025)</button> <button class="movie-button" onclick="loadVideo('GARFIELD', 'https://abra--2531e06c.api.cosmic-crab.buzz/07b0926bd61a643af22c4cc4bca3b1ca2c117791/The.Garfield.Movie.2024.720p.WEBRip.800MB.x264-GalaxyRG%5BTGx%5D/The.Garfield.Movie.2024.720p.WEBRip.800MB.x264-GalaxyRG.mkv?api-key=8acbcf1e-732c-4574-a3bf-27e6a85b86f1&download=true&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTE4MjUyMjcsInJhdGUiOiI1TSIsInJvbGUiOiJmcmVlIiwic2Vzc2lvbklEIjoiTVRjMU1UY3pPRGd4T1h4T2QzZEJUa1ZaTVZkVlZsWk9SVWw1VmpGU1NVNVdSa0pVVlZaRVRteFNUbFJFWkU1VE1VcE5Va1ZrV2xWVmFFcFdhekZoVm14S1ZGVnFWbEJYYXpsaFRUQk9WRkl3ZEVsVmEwVTlmSEZHSEdYcUJTR1IwSmZxUXA2UHRVUVpfRkNKQmJiVVVzZUd3TzFpWXFrViIsImRvbWFpbiI6IndlYnRvci5pbyIsImFnZW50IjoiTW96aWxsYS81LjAgKExpbnV4OyBBbmRyb2lkIDEwOyBLKSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvMTM3LjAuMC4wIFNhZmFyaS81MzcuMzYiLCJyZW1vdGVBZGRyZXNzIjoiMTcyLjY5LjY4LjI4In0.OeCvQlw_DJHCaAwDkjmy0UHNFQC6MPdFG-ydAdwCJ-g')">The Garfield Movie (2024)</button> <button class="movie-button" onclick="loadVideo('Movie 3', 'https://example.com/video3.mp4')">PLACEHOLDER 3</button> <button class="movie-button" onclick="loadVideo('Movie 4', 'https://example.com/video4.mp4')">PLACEHOLDER 4</button> <button class="movie-button" onclick="loadVideo('Movie 5', 'https://example.com/video5.mp4')">PLACEHOLDER 5</button> </div> <script> function loadVideo(title, url) { const loader = document.getElementById('loader'); const container = document.getElementById('videoContainer'); const player = document.getElementById('videoPlayer'); const source = document.getElementById('videoSource'); const titleEl = document.getElementById('videoTitle'); container.style.display = 'none'; loader.style.display = 'block'; setTimeout(() => { loader.style.display = 'none'; titleEl.textContent = title; source.src = url; player.load(); container.style.display = 'block'; }, 2000); } function filterMovies() { const query = document.getElementById('search').value.toLowerCase(); const buttons = document.querySelectorAll('.movie-button'); buttons.forEach(button => { const match = button.textContent.toLowerCase().includes(query); button.style.display = match ? 'inline-block' : 'none'; }); } </script> </body> </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta property="og:title" content="budgetz free movies">
+  <meta property="og:description" content="Watch free movies with no fucking ads" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0d0d0d">
+  <meta name="author" content="Budgetz">
+  <meta name="keywords" content="free movies, watch online, no ads, streaming, 2025 movies, Garfield, Ballerina">
+  <title>Budgetz Movies</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background-color: #0d0d0d;
+      color: #f0f0f0;
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: linear-gradient(to right, #111, #1a1a1a);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      border-bottom: 1px solid #222;
+    }
+    header h1 {
+      color: gold;
+      font-size: 3rem;
+      display: inline;
+    }
+    header h2 {
+      color: cyan;
+      font-size: 2rem;
+      margin-top: 0.3rem;
+    }
+    /* Toggle Theme Button */
+    .theme-toggle {
+      text-align: center;
+      margin: 1rem;
+    }
+    .theme-toggle button {
+      padding: 0.6rem 1rem;
+      border-radius: 10px;
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+    .theme-toggle button:hover {
+      background-color: #555;
+    }
+    /* Search Bar */
+    .search-bar {
+      text-align: center;
+      padding: 1rem;
+    }
+    #search {
+      padding: 0.7rem;
+      width: 80%;
+      max-width: 400px;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: none;
+      background-color: #222;
+      color: white;
+      box-shadow: 0 0 10px #007bff44;
+      transition: 0.3s;
+    }
+    #search:focus {
+      outline: none;
+      box-shadow: 0 0 15px #00ffff88;
+    }
+    /* Movie List */
+    .movie-buttons {
+      text-align: center;
+      padding: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .movie-button {
+      background: linear-gradient(145deg, #007bff, #0051aa);
+      color: white;
+      border: none;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: background 0.3s, transform 0.2s;
+      min-width: 180px;
+    }
+    .movie-button:hover {
+      background: linear-gradient(145deg, #00bfff, #007bff);
+      transform: scale(1.05);
+    }
+    /* Video Container */
+    .video-container {
+      display: none;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #1a1a1a;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+      max-width: 900px;
+      text-align: center;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    .video-title {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #00ffff;
+    }
+    video {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+    .loader {
+      display: none;
+      font-size: 2rem;
+      text-align: center;
+      padding: 2rem;
+      color: #00ffff;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2.5rem;
+      }
+      header h2 {
+        font-size: 1.5rem;
+      }
+      .movie-button {
+        width: 100%;
+        font-size: 1rem;
+      }
+    }
+
+    /* Light Theme */
+    body.light {
+      background-color: #f2f2f2;
+      color: #111;
+    }
+    body.light header {
+      background: linear-gradient(to right, #eee, #ccc);
+      color: #000;
+    }
+    body.light .movie-button {
+      background: linear-gradient(145deg, #888, #aaa);
+      color: black;
+    }
+    body.light .movie-button:hover {
+      background: linear-gradient(145deg, #aaa, #888);
+    }
+    body.light .video-container {
+      background-color: #fff;
+      color: black;
+    }
+    body.light #search {
+      background-color: #ddd;
+      color: #111;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>budgetz</h1>
+    <h2>movies</h2>
+  </header>
+
+  <!-- Theme Toggle -->
+  <div class="theme-toggle">
+    <button onclick="toggleTheme()">Toggle Theme</button>
+  </div>
+
+  <div class="video-container" id="videoContainer">
+    <h2 class="video-title" id="videoTitle">Select a movie</h2>
+    <video id="videoPlayer" controls>
+      <source id="videoSource" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <div class="loader" id="loader">Loading...</div>
+
+  <div class="search-bar">
+    <input type="text" id="search" placeholder="Search movies..." oninput="filterMovies()">
+  </div>
+
+  <div class="movie-buttons" id="movieButtons">
+    <button class="movie-button" onclick="loadVideo('Ballerina (2025)', 'https://abra--2531e06c.api.cosmic-crab.buzz/18ab2385f515456e08380033b4dcfb5258358c33/Ballerina%20%282025%29%20%5B2160p%5D%20%5BHDR%5D%20%28WEB-DL%29%20%5BWMAN-LorD%5D/Ballerina.2025.2160p.WEB-DL.HDR.x265.10bit.ATMOS.DD5.1.%5BWMAN-LorD%5D.mkv?api-key=8acbcf1e-732c-4574-a3bf-27e6a85b86f1&download=true&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTE4MjI5MzAsInJhdGUiOiI1TSIsInJvbGUiOiJmcmVlIiwic2Vzc2lvbklEIjoiTVRjMU1UY3pOak0yTjN4T2QzZEJUa1ZuTVZaVVVsUlVNSEJXVld0V1EwNVZSVEJVUlRGQ1ZsUk5NVkV4YUVKUmEwNUxVa1pGTTA1cmRGZFJNR2hYVkZWM01WTkdUbUZWVlRWSlZFVm9TRTE2VGtWU1ZVVTlmRFBwa01EenNSZEVWWkVxWEs1TjlpV0Voa19zY2dpb2F5NncyTXNPeDY5aSIsImRvbWFpbiI6IndlYnRvci5pbyIsImFnZW50IjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6MTQwLjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvMTQwLjAiLCJyZW1vdGVBZGRyZXNzIjoiMTcyLjY4LjIzNC4xODcifQ.L6cFgPZ8zlsgBUTC0d8UVZn6I4ZHwmYDsCJw0BYwI9s')">Ballerina (2025)</button>
+    <button class="movie-button" onclick="loadVideo('The Garfield Movie (2024)', 'https://abra--2531e06c.api.cosmic-crab.buzz/07b0926bd61a643af22c4cc4bca3b1ca2c117791/The.Garfield.Movie.2024.720p.WEBRip.800MB.x264-GalaxyRG%5BTGx%5D/The.Garfield.Movie.2024.720p.WEBRip.800MB.x264-GalaxyRG.mkv?api-key=8acbcf1e-732c-4574-a3bf-27e6a85b86f1&download=true&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTE4MjUyMjcsInJhdGUiOiI1TSIsInJvbGUiOiJmcmVlIiwic2Vzc2lvbklEIjoiTVRjMU1UY3pPRGd4T1h4T2QzZEJUa1ZaTVZkVlZsWk9SVWw1VmpGU1NVNVdSa0pVVlZaRVRteFNUbFJFWkU1VE1VcE5Va1ZrV2xWVmFFcFdhekZoVm14S1ZGVnFWbEJYYXpsaFRUQk9WRkl3ZEVsVmEwVTlmSEZHSEdYcUJTR1IwSmZxUXA2UHRVUVpfRkNKQmJiVVVzZUd3TzFpWXFrViIsImRvbWFpbiI6IndlYnRvci5pbyIsImFnZW50IjoiTW96aWxsYS81LjAgKExpbnV4OyBBbmRyb2lkIDEwOyBLKSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvMTM3LjAuMC4wIFNhZmFyaS81MzcuMzYiLCJyZW1vdGVBZGRyZXNzIjoiMTcyLjY5LjY4LjI4In0.OeCvQlw_DJHCaAwDkjmy0UHNFQC6MPdFG-ydAdwCJ-g')">The Garfield Movie (2024)</button>
+    <button class="movie-button" onclick="loadVideo('A Minecraft Movie (2025)', 'https://abra--2531e06c.api.cosmic-crab.buzz/1556dc26ed022ffd23c49151a90a7b69a74bc70a/A%20Minecraft%20Movie%20%282025%29%201080p%20BluRay%20AV1%20Opus%207.1%20MULTi4%20%5BRAV1NE%5D/A.Minecraft.Movie.2025.1080p.BluRay.AV1.Opus.7.1.MULTi4-RAV1NE.mkv?api-key=8acbcf1e-732c-4574-a3bf-27e6a85b86f1&download=true&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTE4ODk1NDUsInJhdGUiOiI1TSIsInJvbGUiOiJmcmVlIiwic2Vzc2lvbklEIjoiTVRjMU1UZ3dNRGszTm54T2QzZEJUa1JLVjFKVlp6QlNNRVpHVFRCRmVsUldTbFZOTVdoR1V6Qk9URlJFVGxCV1ZUVk1VVEI0V0UxcldreFZSRlpMVm10R1NWUldXbGhTUlVaRlYyeHZNbFl3TVZKUk1VVTlmSmtjTnE0WnVUWFpSZ0ZCMXhmcG14UzMwMlpGRzBhbldONVJsODB3N01qbSIsImRvbWFpbiI6IndlYnRvci5pbyIsImFnZW50IjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6MTQwLjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvMTQwLjAiLCJyZW1vdGVBZGRyZXNzIjoiMTcyLjcwLjEwOC4xOTgifQ.Qm5naJvzXWX9-U0PLx3O8IIdFIobjOc9L1LSR9a1LgY')">A Minecraft Movie (2025)</button>
+    <button class="movie-button" onclick="loadVideo('Captain America: Brave New World (2025)', 'https://abra--2531e06c.api.cosmic-crab.buzz/19d0c3f10bd19867d19ca3dff445c833cb927b35/Captain.America.Brave.New.World.2025.1080p.TeleSync.X264.Will1869/Captain.America.Brave.New.World.2025.1080p.TeleSync.X264.Will1869.mkv?api-key=8acbcf1e-732c-4574-a3bf-27e6a85b86f1&download=true&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTE4ODk2MzcsInJhdGUiOiI1TSIsInJvbGUiOiJmcmVlIiwic2Vzc2lvbklEIjoiTVRjMU1UZ3dNRGszTm54T2QzZEJUa1JLVjFKVlp6QlNNRVpHVFRCRmVsUldTbFZOTVdoR1V6Qk9URlJFVGxCV1ZUVk1VVEI0V0UxcldreFZSRlpMVm10R1NWUldXbGhTUlVaRlYyeHZNbFl3TVZKUk1VVTlmSmtjTnE0WnVUWFpSZ0ZCMXhmcG14UzMwMlpGRzBhbldONVJsODB3N01qbSIsImRvbWFpbiI6IndlYnRvci5pbyIsImFnZW50IjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6MTQwLjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvMTQwLjAiLCJyZW1vdGVBZGRyZXNzIjoiMTcyLjY4LjIzNC4xOTUifQ.YmpfuQ3ZL_qahJHgXlgQ_1Qa0kV8grdVr0BdTGVOXjc')">Captain America: Brave New World (2025)</button>
+    <button class="movie-button" onclick="loadVideo('Dog Man (2025)', 'https://abra--5fd3af94.api.cosmic-crab.buzz/ea9c098e4e314d5255e582ff3ea6c808376cfcd0/Dog.Man.2025.1080p.WEB.h264-ETHEL/Dog.Man.2025.1080p.WEB.h264-ETHEL.mkv?api-key=8acbcf1e-732c-4574-a3bf-27e6a85b86f1&download=true&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTE4ODk2NDEsInJhdGUiOiI1TSIsInJvbGUiOiJmcmVlIiwic2Vzc2lvbklEIjoiTVRjMU1UZ3dNRGszTm54T2QzZEJUa1JLVjFKVlp6QlNNRVpHVFRCRmVsUldTbFZOTVdoR1V6Qk9URlJFVGxCV1ZUVk1VVEI0V0UxcldreFZSRlpMVm10R1NWUldXbGhTUlVaRlYyeHZNbFl3TVZKUk1VVTlmSmtjTnE0WnVUWFpSZ0ZCMXhmcG14UzMwMlpGRzBhbldONVJsODB3N01qbSIsImRvbWFpbiI6IndlYnRvci5pbyIsImFnZW50IjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6MTQwLjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvMTQwLjAiLCJyZW1vdGVBZGRyZXNzIjoiMTcyLjY4LjIzNC4xOTUifQ.l9aaEsD6UpOjgoRJgREj5wLbqh_RRyXwbXkVTKCb8YQ')">Dog Man (2025)</button>
+    <button class="movie-button" onclick="loadVideo('Transformers One (2024)', 's')">Transformers One (2024)</button>
+    <button class="movie-button" onclick="loadVideo('Movie 5', 'https://example.com/video5.mp4')">PLACEHOLDER 5</button>
+    <button class="movie-button" onclick="loadVideo('Movie 5', 'https://example.com/video5.mp4')">PLACEHOLDER 5</button>
+    <button class="movie-button" onclick="loadVideo('Movie 5', 'https://example.com/video5.mp4')">PLACEHOLDER 5</button>
+    <button class="movie-button" onclick="loadVideo('Movie 5', 'https://example.com/video5.mp4')">PLACEHOLDER 5</button>
+    <button class="movie-button" onclick="loadVideo('Movie 5', 'https://example.com/video5.mp4')">PLACEHOLDER 5</button>
+    <button class="movie-button" onclick="loadVideo('Movie 5', 'https://example.com/video5.mp4')">PLACEHOLDER 5</button>
+    <button class="movie-button" onclick="loadVideo('Movie 5', 'https://example.com/video5.mp4')">PLACEHOLDER 5</button>
+    <button class="movie-button" onclick="loadVideo('Movie 5', 'https://example.com/video5.mp4')">PLACEHOLDER 5</button>
+    <button class="movie-button" onclick="loadVideo('Movie 5', 'https://example.com/video5.mp4')">PLACEHOLDER 5</button>
+    <button class="movie-button" onclick="loadVideo('Movie 5', 'https://example.com/video5.mp4')">PLACEHOLDER 5</button>
+    <button class="movie-button" onclick="loadVideo('Movie 5', 'https://example.com/video5.mp4')">PLACEHOLDER 5</button>
+    <button class="movie-button" onclick="loadVideo('Movie 5', 'https://example.com/video5.mp4')">PLACEHOLDER 5</button>
+    <button class="movie-button" onclick="loadVideo('Movie 5', 'https://example.com/video5.mp4')">PLACEHOLDER 5</button>
+    <button class="movie-button" onclick="loadVideo('Movie 5', 'https://example.com/video5.mp4')">PLACEHOLDER 5</button>
+    <button class="movie-button" onclick="loadVideo('Movie 5', 'https://example.com/video5.mp4')">PLACEHOLDER 5</button>
+  </div>
+
+  <script>
+    function loadVideo(title, url) {
+      const loader = document.getElementById('loader');
+      const container = document.getElementById('videoContainer');
+      const player = document.getElementById('videoPlayer');
+      const source = document.getElementById('videoSource');
+      const titleEl = document.getElementById('videoTitle');
+
+      container.style.display = 'none';
+      loader.style.display = 'block';
+
+      setTimeout(() => {
+        loader.style.display = 'none';
+        titleEl.textContent = title;
+        source.src = url;
+        player.load();
+        container.style.display = 'block';
+      }, 2000);
+    }
+
+    function filterMovies() {
+      const query = document.getElementById('search').value.toLowerCase();
+      const buttons = document.querySelectorAll('.movie-button');
+      buttons.forEach(button => {
+        const match = button.textContent.toLowerCase().includes(query);
+        button.style.display = match ? 'inline-block' : 'none';
+      });
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('light');
+    }
+  </script>
+</body>
+</html>
