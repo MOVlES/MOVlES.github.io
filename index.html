@@ -14,238 +14,483 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, sans-serif;
-      background-color: #0d0d0d;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
       color: #f0f0f0;
       line-height: 1.6;
-      transition: background 0.3s, color 0.3s;
+      min-height: 100vh;
+      transition: all 0.3s ease;
     }
+    
+    /* Header Styles */
     header {
       text-align: center;
-      padding: 2rem 1rem;
-      background: linear-gradient(to right, #111, #1a1a1a);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-      border-bottom: 1px solid #222;
+      padding: 3rem 1rem;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      border-bottom: 2px solid #00ffff;
+      position: relative;
+      overflow: hidden;
     }
+    
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent 30%, rgba(0, 255, 255, 0.1) 50%, transparent 70%);
+      animation: shine 3s infinite;
+    }
+    
+    @keyframes shine {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    
     header h1 {
-      color: gold;
-      font-size: 3rem;
-      display: inline;
+      background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 4rem;
+      margin: 0;
+      text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+      animation: glow 2s ease-in-out infinite alternate;
     }
+    
+    @keyframes glow {
+      from { text-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+      to { text-shadow: 0 0 40px rgba(255, 215, 0, 0.8); }
+    }
+    
     header h2 {
-      color: cyan;
-      font-size: 2rem;
-      margin-top: 0.3rem;
+      color: #00ffff;
+      font-size: 2.5rem;
+      margin: 0.5rem 0;
+      text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
     }
-    /* Toggle Theme Button */
+    
+    /* Navigation */
+    .nav-container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+    
+    .nav-button {
+      background: linear-gradient(145deg, #00ffff, #0080ff);
+      color: #000;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
+      min-width: 150px;
+    }
+    
+    .nav-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 255, 255, 0.5);
+      background: linear-gradient(145deg, #0080ff, #00ffff);
+    }
+    
+    .redirect-button {
+      background: linear-gradient(145deg, #ff6b6b, #ff8787);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+      min-width: 150px;
+    }
+    
+    .redirect-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(255, 107, 107, 0.5);
+      background: linear-gradient(145deg, #ff8787, #ff6b6b);
+    }
+    
+    /* Theme Toggle */
     .theme-toggle {
       text-align: center;
       margin: 1rem;
     }
+    
     .theme-toggle button {
-      padding: 0.6rem 1rem;
-      border-radius: 10px;
-      background-color: #333;
+      background: linear-gradient(145deg, #333, #555);
       color: white;
       border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 25px;
       cursor: pointer;
       font-size: 1rem;
-      transition: background 0.3s;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     }
+    
     .theme-toggle button:hover {
-      background-color: #555;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
     }
-    /* Search Bar */
-    .search-bar {
+    
+    /* Main Content */
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    /* Folder Container */
+    .folder-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    
+    .folder {
+      background: linear-gradient(145deg, #1a1a2e, #16213e);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .folder::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .folder:hover {
+      transform: translateY(-5px);
+      border-color: #00ffff;
+      box-shadow: 0 15px 40px rgba(0, 255, 255, 0.2);
+    }
+    
+    .folder:hover::before {
+      opacity: 1;
+    }
+    
+    .folder-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
       text-align: center;
-      padding: 1rem;
     }
-    #search {
-      padding: 0.7rem;
-      width: 80%;
-      max-width: 400px;
-      font-size: 1rem;
-      border-radius: 10px;
-      border: none;
-      background-color: #222;
+    
+    .folder-title {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      color: #00ffff;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+    
+    .folder-description {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #ccc;
+    }
+    
+    .folder-button {
+      background: linear-gradient(145deg, #007bff, #0051aa);
       color: white;
-      box-shadow: 0 0 10px #007bff44;
-      transition: 0.3s;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      width: 100%;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: bold;
     }
-    #search:focus {
-      outline: none;
-      box-shadow: 0 0 15px #00ffff88;
+    
+    .folder-button:hover {
+      background: linear-gradient(145deg, #0051aa, #007bff);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
     }
-    /* Movie List */
-    .movie-buttons {
-      text-align: center;
+    
+    .paid-folder {
+      background: linear-gradient(145deg, #2e1a1a, #3e1616);
+      border-color: #ffd700;
+    }
+    
+    .paid-folder:hover {
+      border-color: #ffd700;
+      box-shadow: 0 15px 40px rgba(255, 215, 0, 0.2);
+    }
+    
+    /* Code Input */
+    .code-input-container {
+      display: none;
+      margin-top: 1rem;
+    }
+    
+    .code-input {
+      width: 100%;
       padding: 1rem;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
+      border: 2px solid #ffd700;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      color: #fff;
+      font-size: 1.1rem;
+      text-align: center;
+      margin-bottom: 1rem;
     }
+    
+    .code-input:focus {
+      outline: none;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+    }
+    
+    /* Movie Lists */
+    .movie-list {
+      display: none;
+      margin-top: 2rem;
+    }
+    
+    .movie-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    
     .movie-button {
       background: linear-gradient(145deg, #007bff, #0051aa);
       color: white;
       border: none;
-      padding: 1rem 1.5rem;
+      padding: 1.5rem 1rem;
       font-size: 1rem;
       cursor: pointer;
-      border-radius: 12px;
-      transition: background 0.3s, transform 0.2s;
-      min-width: 180px;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      text-align: center;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
     }
+    
     .movie-button:hover {
       background: linear-gradient(145deg, #00bfff, #007bff);
-      transform: scale(1.05);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 191, 255, 0.3);
     }
+    
+    .paid-movie-button {
+      background: linear-gradient(145deg, #ffd700, #ffed4e);
+      color: #000;
+    }
+    
+    .paid-movie-button:hover {
+      background: linear-gradient(145deg, #ffed4e, #ffd700);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+    }
+    
+    /* Search Bar */
+    .search-container {
+      text-align: center;
+      margin: 2rem 0;
+    }
+    
+    .search-input {
+      padding: 1rem;
+      width: 80%;
+      max-width: 500px;
+      font-size: 1.1rem;
+      border-radius: 25px;
+      border: 2px solid #00ffff;
+      background: rgba(0, 0, 0, 0.3);
+      color: white;
+      transition: all 0.3s ease;
+    }
+    
+    .search-input:focus {
+      outline: none;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    }
+    
     /* Video Container */
     .video-container {
       display: none;
-      margin: 30px auto;
-      padding: 20px;
-      background-color: #1a1a1a;
-      border-radius: 16px;
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+      margin: 2rem auto;
+      padding: 2rem;
+      background: linear-gradient(145deg, #1a1a2e, #16213e);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       max-width: 900px;
       text-align: center;
-      animation: fadeIn 0.5s ease-in-out;
+      border: 2px solid #00ffff;
     }
+    
     .video-title {
-      font-size: 1.8rem;
-      margin-bottom: 20px;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
       color: #00ffff;
+      text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
     }
+    
     video {
       width: 100%;
       max-width: 800px;
       height: auto;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
     }
+    
+    .back-button {
+      background: linear-gradient(145deg, #555, #777);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 15px;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .back-button:hover {
+      background: linear-gradient(145deg, #777, #555);
+      transform: translateY(-2px);
+    }
+    
+    /* Loading Animation */
     .loader {
       display: none;
-      font-size: 2rem;
       text-align: center;
-      padding: 2rem;
+      padding: 3rem;
       color: #00ffff;
+      font-size: 1.5rem;
     }
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(15px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    
+    .loading-spinner {
+      border: 4px solid rgba(0, 255, 255, 0.3);
+      border-top: 4px solid #00ffff;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
     }
-    @media (max-width: 600px) {
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Light Theme */
+    body.light {
+      background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 50%, #d0d0d0 100%);
+      color: #333;
+    }
+    
+    body.light .folder {
+      background: linear-gradient(145deg, #fff, #f0f0f0);
+      color: #333;
+    }
+    
+    body.light .video-container {
+      background: linear-gradient(145deg, #fff, #f0f0f0);
+      color: #333;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
       header h1 {
         font-size: 2.5rem;
       }
+      
       header h2 {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
       }
-      .movie-button {
-        width: 100%;
-        font-size: 1rem;
+      
+      .nav-container {
+        flex-direction: column;
+        align-items: center;
       }
-    }
-
-    /* Light Theme */
-    body.light {
-      background-color: #f2f2f2;
-      color: #111;
-    }
-    body.light header {
-      background: linear-gradient(to right, #eee, #ccc);
-      color: #000;
-    }
-    body.light .movie-button {
-      background: linear-gradient(145deg, #888, #aaa);
-      color: black;
-    }
-    body.light .movie-button:hover {
-      background: linear-gradient(145deg, #aaa, #888);
-    }
-    body.light .video-container {
-      background-color: #fff;
-      color: black;
-    }
-    body.light #search {
-      background-color: #ddd;
-      color: #111;
+      
+      .folder-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .movie-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Free</h1>
-    <h2>Movies</h2>
+    <h1>🎬 Free Movies 🎬</h1>
+    <h2>Entertainment Hub</h2>
   </header>
 
-  <!-- Theme Toggle -->
-  <div class="theme-toggle">
-    <button onclick="toggleTheme()">Toggle Theme</button>
+  <div class="nav-container">
+    <button class="redirect-button" onclick="window.open('https://movies.github.io/request', '_blank')">
+      📝 REQUEST MOVIES
+
+
   </div>
 
-  <div class="video-container" id="videoContainer">
-    <h2 class="video-title" id="videoTitle">Select a movie</h2>
-    <video id="videoPlayer" controls>
-      <source id="videoSource" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+  <div class="main-content">
+    <!-- Home Screen with Folders -->
+    <div id="homeScreen">
+      <div class="folder-container">
+<!-- Replace these two buttons only -->
+
+<!-- Free Movies Folder -->
+<div class="folder" style="position: relative;">
+  <div class="folder-icon">📁</div>
+  <div class="folder-title">Free Movies</div>
+  <div class="folder-description">
+    Access our complete collection of free movies with no restrictions
   </div>
-
-  <div class="loader" id="loader">Loading...</div>
-
-  <div class="search-bar">
-    <input type="text" id="search" placeholder="Search movies..." oninput="filterMovies()">
+  <button class="folder-button">
+    Open Free Movies
+  </button>
+  <div onclick="window.open('https://movles.github.io/FreeMovies', '_blank')" 
+       style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; z-index: 10;">
   </div>
+</div>
 
-  <div class="movie-buttons" id="movieButtons">
-    <button class="movie-button" onclick="loadVideo('Ballerina (2025)', 'https://abra--2531e06c.api.cosmic-crab.buzz/18ab2385f515456e08380033b4dcfb5258358c33/Ballerina%20%282025%29%20%5B2160p%5D%20%5BHDR%5D%20%28WEB-DL%29%20%5BWMAN-LorD%5D/Ballerina.2025.2160p.WEB-DL.HDR.x265.10bit.ATMOS.DD5.1.%5BWMAN-LorD%5D.mkv?api-key=8acbcf1e-732c-4574-a3bf-27e6a85b86f1&download=true&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTE4MjI5MzAsInJhdGUiOiI1TSIsInJvbGUiOiJmcmVlIiwic2Vzc2lvbklEIjoiTVRjMU1UY3pOak0yTjN4T2QzZEJUa1ZuTVZaVVVsUlVNSEJXVld0V1EwNVZSVEJVUlRGQ1ZsUk5NVkV4YUVKUmEwNUxVa1pGTTA1cmRGZFJNR2hYVkZWM01WTkdUbUZWVlRWSlZFVm9TRTE2VGtWU1ZVVTlmRFBwa01EenNSZEVWWkVxWEs1TjlpV0Voa19zY2dpb2F5NncyTXNPeDY5aSIsImRvbWFpbiI6IndlYnRvci5pbyIsImFnZW50IjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6MTQwLjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvMTQwLjAiLCJyZW1vdGVBZGRyZXNzIjoiMTcyLjY4LjIzNC4xODcifQ.L6cFgPZ8zlsgBUTC0d8UVZn6I4ZHwmYDsCJw0BYwI9s')">Ballerina (2025)</button>
-    <button class="movie-button" onclick="loadVideo('The Garfield Movie (2024)', 'https://abra--2531e06c.api.cosmic-crab.buzz/07b0926bd61a643af22c4cc4bca3b1ca2c117791/The.Garfield.Movie.2024.720p.WEBRip.800MB.x264-GalaxyRG%5BTGx%5D/The.Garfield.Movie.2024.720p.WEBRip.800MB.x264-GalaxyRG.mkv?api-key=8acbcf1e-732c-4574-a3bf-27e6a85b86f1&download=true&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTE4MjUyMjcsInJhdGUiOiI1TSIsInJvbGUiOiJmcmVlIiwic2Vzc2lvbklEIjoiTVRjMU1UY3pPRGd4T1h4T2QzZEJUa1ZaTVZkVlZsWk9SVWw1VmpGU1NVNVdSa0pVVlZaRVRteFNUbFJFWkU1VE1VcE5Va1ZrV2xWVmFFcFdhekZoVm14S1ZGVnFWbEJYYXpsaFRUQk9WRkl3ZEVsVmEwVTlmSEZHSEdYcUJTR1IwSmZxUXA2UHRVUVpfRkNKQmJiVVVzZUd3TzFpWXFrViIsImRvbWFpbiI6IndlYnRvci5pbyIsImFnZW50IjoiTW96aWxsYS81LjAgKExpbnV4OyBBbmRyb2lkIDEwOyBLKSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvMTM3LjAuMC4wIFNhZmFyaS81MzcuMzYiLCJyZW1vdGVBZGRyZXNzIjoiMTcyLjY5LjY4LjI4In0.OeCvQlw_DJHCaAwDkjmy0UHNFQC6MPdFG-ydAdwCJ-g')">The Garfield Movie (2024)</button>
-    <button class="movie-button" onclick="loadVideo('A Minecraft Movie (2025)', 'https://abra--2531e06c.api.cosmic-crab.buzz/1556dc26ed022ffd23c49151a90a7b69a74bc70a/A%20Minecraft%20Movie%20%282025%29%201080p%20BluRay%20AV1%20Opus%207.1%20MULTi4%20%5BRAV1NE%5D/A.Minecraft.Movie.2025.1080p.BluRay.AV1.Opus.7.1.MULTi4-RAV1NE.mkv?api-key=8acbcf1e-732c-4574-a3bf-27e6a85b86f1&download=true&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTE4ODk1NDUsInJhdGUiOiI1TSIsInJvbGUiOiJmcmVlIiwic2Vzc2lvbklEIjoiTVRjMU1UZ3dNRGszTm54T2QzZEJUa1JLVjFKVlp6QlNNRVpHVFRCRmVsUldTbFZOTVdoR1V6Qk9URlJFVGxCV1ZUVk1VVEI0V0UxcldreFZSRlpMVm10R1NWUldXbGhTUlVaRlYyeHZNbFl3TVZKUk1VVTlmSmtjTnE0WnVUWFpSZ0ZCMXhmcG14UzMwMlpGRzBhbldONVJsODB3N01qbSIsImRvbWFpbiI6IndlYnRvci5pbyIsImFnZW50IjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6MTQwLjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvMTQwLjAiLCJyZW1vdGVBZGRyZXNzIjoiMTcyLjcwLjEwOC4xOTgifQ.Qm5naJvzXWX9-U0PLx3O8IIdFIobjOc9L1LSR9a1LgY')">A Minecraft Movie (2025)</button>
-    <button class="movie-button" onclick="loadVideo('Captain America: Brave New World (2025)', 'https://abra--2531e06c.api.cosmic-crab.buzz/19d0c3f10bd19867d19ca3dff445c833cb927b35/Captain.America.Brave.New.World.2025.1080p.TeleSync.X264.Will1869/Captain.America.Brave.New.World.2025.1080p.TeleSync.X264.Will1869.mkv?api-key=8acbcf1e-732c-4574-a3bf-27e6a85b86f1&download=true&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTE4ODk2MzcsInJhdGUiOiI1TSIsInJvbGUiOiJmcmVlIiwic2Vzc2lvbklEIjoiTVRjMU1UZ3dNRGszTm54T2QzZEJUa1JLVjFKVlp6QlNNRVpHVFRCRmVsUldTbFZOTVdoR1V6Qk9URlJFVGxCV1ZUVk1VVEI0V0UxcldreFZSRlpMVm10R1NWUldXbGhTUlVaRlYyeHZNbFl3TVZKUk1VVTlmSmtjTnE0WnVUWFpSZ0ZCMXhmcG14UzMwMlpGRzBhbldONVJsODB3N01qbSIsImRvbWFpbiI6IndlYnRvci5pbyIsImFnZW50IjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6MTQwLjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvMTQwLjAiLCJyZW1vdGVBZGRyZXNzIjoiMTcyLjY4LjIzNC4xOTUifQ.YmpfuQ3ZL_qahJHgXlgQ_1Qa0kV8grdVr0BdTGVOXjc')">Captain America: Brave New World (2025)</button>
-    <button class="movie-button" onclick="loadVideo('Dog Man (2025)', 'https://abra--5fd3af94.api.cosmic-crab.buzz/ea9c098e4e314d5255e582ff3ea6c808376cfcd0/Dog.Man.2025.1080p.WEB.h264-ETHEL/Dog.Man.2025.1080p.WEB.h264-ETHEL.mkv?api-key=8acbcf1e-732c-4574-a3bf-27e6a85b86f1&download=true&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTE4ODk2NDEsInJhdGUiOiI1TSIsInJvbGUiOiJmcmVlIiwic2Vzc2lvbklEIjoiTVRjMU1UZ3dNRGszTm54T2QzZEJUa1JLVjFKVlp6QlNNRVpHVFRCRmVsUldTbFZOTVdoR1V6Qk9URlJFVGxCV1ZUVk1VVEI0V0UxcldreFZSRlpMVm10R1NWUldXbGhTUlVaRlYyeHZNbFl3TVZKUk1VVTlmSmtjTnE0WnVUWFpSZ0ZCMXhmcG14UzMwMlpGRzBhbldONVJsODB3N01qbSIsImRvbWFpbiI6IndlYnRvci5pbyIsImFnZW50IjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6MTQwLjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvMTQwLjAiLCJyZW1vdGVBZGRyZXNzIjoiMTcyLjY4LjIzNC4xOTUifQ.l9aaEsD6UpOjgoRJgREj5wLbqh_RRyXwbXkVTKCb8YQ')">Dog Man (2025)</button>
-    <button class="movie-button" onclick="loadVideo('Transformers One (2024)', 'https://abra--5fd3af94.api.cosmic-crab.buzz/b8d6ca8c95b3735c5cb21e9f5147dcdd8f155333/Transformers.One.2024.1080p.AMZN.WEBRip.1400MB.DD5.1.x264-GalaxyRG%5BTGx%5D/Transformers.One.2024.1080p.AMZN.WEBRip.1400MB.DD5.1.x264-GalaxyRG.mkv?api-key=8acbcf1e-732c-4574-a3bf-27e6a85b86f1&download=true&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTE4ODk4MzksInJhdGUiOiI1TSIsInJvbGUiOiJmcmVlIiwic2Vzc2lvbklEIjoiTVRjMU1UZ3dNRGszTm54T2QzZEJUa1JLVjFKVlp6QlNNRVpHVFRCRmVsUldTbFZOTVdoR1V6Qk9URlJFVGxCV1ZUVk1VVEI0V0UxcldreFZSRlpMVm10R1NWUldXbGhTUlVaRlYyeHZNbFl3TVZKUk1VVTlmSmtjTnE0WnVUWFpSZ0ZCMXhmcG14UzMwMlpGRzBhbldONVJsODB3N01qbSIsImRvbWFpbiI6IndlYnRvci5pbyIsImFnZW50IjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NDsgcnY6MTQwLjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvMTQwLjAiLCJyZW1vdGVBZGRyZXNzIjoiMTcyLjcwLjEwOC4yMCJ9.Uxnaskm3PP6STuUVwKzUBN9Wow1QpoS57ziYKjVUq8A')">Transformers One (2024)</button>
-    <button class="movie-button" onclick="loadVideo('Karate Kid: Legends (2025)', 'https://tinyurl.com/karatekid33')">Karate</button>
+<!-- Paid Movies Folder -->
+<div class="folder paid-folder" style="position: relative;">
+  <div class="folder-icon">🔒</div>
+  <div class="folder-title">Premium Movies</div>
+  <div class="folder-description">
+    Exclusive premium content - Access code required
   </div>
-
-  <script>
-    function loadVideo(title, url) {
-      const loader = document.getElementById('loader');
-      const container = document.getElementById('videoContainer');
-      const player = document.getElementById('videoPlayer');
-      const source = document.getElementById('videoSource');
-      const titleEl = document.getElementById('videoTitle');
-
-      container.style.display = 'none';
-      loader.style.display = 'block';
-
-      setTimeout(() => {
-        loader.style.display = 'none';
-        titleEl.textContent = title;
-        source.src = url;
-        player.load();
-        container.style.display = 'block';
-      }, 2000);
-    }
-
-    function filterMovies() {
-      const query = document.getElementById('search').value.toLowerCase();
-      const buttons = document.querySelectorAll('.movie-button');
-      buttons.forEach(button => {
-        const match = button.textContent.toLowerCase().includes(query);
-        button.style.display = match ? 'inline-block' : 'none';
-      });
-    }
-
-    function toggleTheme() {
-      document.body.classList.toggle('light');
-    }
-  </script>
-</body>
-</html>
+  <button class="folder-button">
+    Enter Access Code
+  </button>
+  <div onclick="window.open('https://movles.github.io/New', '_blank')" 
+       style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; z-index: 10;">
+  </div>
+</div>
